@@ -9,10 +9,16 @@ public class Game : MonoBehaviour {
     public Transform player;
     public Transform boundary;
     public Transform screen;
-
+    public Transform curser;
 
     public void Awake() {
         instance = this;
+    }
+
+    public void Update() {
+        Vector3 p = player.transform.position/5.0f;
+    
+        curser.transform.position = new Vector3(p.x * 128.0f, 5, p.z * 128.0f);
     }
 
     public void OnProjectileAtMaxRange(Projectile projectile) {
