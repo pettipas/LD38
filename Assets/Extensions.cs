@@ -4,7 +4,33 @@ using System.Linq;
 
 public static class Extensions {
 
-  
+    public static void SafePlay(this Animator animator, string a, int layer = 0, float time = 0) {
+
+        if (!animator.gameObject.activeSelf) {
+            Debug.Log("WARNING animator is disabled, trying to play: " + a);
+            return;
+        }
+
+        var state = animator.GetCurrentAnimatorStateInfo(0);
+        if (state.IsName(a)) {
+            return;
+        }
+
+        animator.Play(a, layer, time);
+
+    }
+
+    public static void SafeEnable(this GameObject g) {
+        if (g != null && !g.activeSelf) {
+            g.SetActive(true);
+        }
+    }
+
+    public static void SafeDisable(this GameObject g) {
+        if (g != null && g.activeSelf) {
+            g.SetActive(false);
+        }
+    }
 
     public static void GotoState(this MonoBehaviour mb, MonoState from, MonoState to) {
         MonoState[] states = mb.GetComponentsInChildren<MonoState>();

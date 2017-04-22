@@ -12,27 +12,52 @@ public class Control : MonoBehaviour {
     public Transform body;
     public Transform gun;
     public Transform launcher;
+    public Animator animator;
+
+    public Bomb bomb;
+
+    public float timer;
+    public float coolDown = 3.0f;
+
+    public void Awake() {
+        timer = coolDown;
+    }
 
     public void Update() {
-
+        timer += Time.smoothDeltaTime;
+        bool moving = false;
         if (Input.GetKey(KeyCode.A)) {
             current = Vector3.left;
             charCtrl.Move(Vector3.left * speed * Time.smoothDeltaTime);
+            moving = true;
         } else if (Input.GetKey(KeyCode.D)) {
             current = Vector3.right;
             charCtrl.Move(Vector3.right * speed * Time.smoothDeltaTime);
+            moving = true;
         } else if (Input.GetKey(KeyCode.S)) {
             current = Vector3.back;
             charCtrl.Move(Vector3.back * speed * Time.smoothDeltaTime);
+            moving = true;
         } else if (Input.GetKey(KeyCode.W)) {
             current = Vector3.forward;
             charCtrl.Move(Vector3.forward * speed * Time.smoothDeltaTime);
+            moving = true;
+        }
+
+        if (moving) {
+            animator.SafePlay("walk");
+        } else {
+            animator.SafePlay("rest");
         }
 
         if(current != Vector3.zero) { 
-            body.forward = current;
             gun.forward = current;
             launcher.forward = current;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q ) && timer >= coolDown) {
+            timer = 0;
+            bomb.Duplicate((transform.position + current/2.0f));
         }
     }
 }
