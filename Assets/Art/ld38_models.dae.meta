@@ -11,27 +11,52 @@ ModelImporter:
     100006: player_right_step
     100008: player_step_left
     100010: bomb
+    100012: spider_attack_1
+    100014: spider_attack_2
+    100016: spider_rest
+    100018: spider_walk_1
+    100020: spider_walk_3
     400000: Box_3
     400002: //RootNode
     400004: player_rest
     400006: player_right_step
     400008: player_step_left
     400010: bomb
+    400012: spider_attack_1
+    400014: spider_attack_2
+    400016: spider_rest
+    400018: spider_walk_1
+    400020: spider_walk_3
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
     2300006: player_step_left
     2300008: bomb
+    2300010: spider_attack_1
+    2300012: spider_attack_2
+    2300014: spider_rest
+    2300016: spider_walk_1
+    2300018: spider_walk_3
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
     3300006: player_step_left
     3300008: bomb
+    3300010: spider_attack_1
+    3300012: spider_attack_2
+    3300014: spider_rest
+    3300016: spider_walk_1
+    3300018: spider_walk_3
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
     4300006: player_rest
     4300008: bomb
+    4300010: spider_rest
+    4300012: spider_walk_1
+    4300014: spider_attack_1
+    4300016: spider_attack_2
+    4300018: spider_walk_3
     9500000: //RootNode
   materials:
     importMaterials: 1
