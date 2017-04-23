@@ -14,6 +14,8 @@ public class KnockBack : MonoBehaviour {
     public AnimationCurve curve;
     public Enemy enemy;
     public MaterialFlasher flasher;
+    public Spin spin;
+
     public void OnEnable() {
         enemy.SafeDisable();
         distance = 0.01f;
@@ -30,6 +32,11 @@ public class KnockBack : MonoBehaviour {
     }
 
     public void Update() {
+
+        if (gameObject == null || spin.enabled ) {
+            return;
+        }
+
         distance += (speed * Time.smoothDeltaTime);
         ctrl.Move(dir * speed * Time.smoothDeltaTime * curve.Evaluate(distance/expectedDistance));
         if (distance >= expectedDistance) {

@@ -9,16 +9,17 @@ public class Enemy : MonoBehaviour {
     public float distance = 2.0f;
     public float coolDown = 3.0f;
     public float timer;
+    public Anomoly target;
 
-    public void Start() {
-
-    }
-
+    bool death;
     public void Update() {
         timer += Time.smoothDeltaTime;
-        if (Vector3.Distance(transform.position, Game.instance.UserPosition) < distance && timer >= coolDown) {
+        if (Vector3.Distance(transform.position, target.ScreenPosition) < distance && timer >= coolDown) {
             timer = 0;
-            animator.SafePlay("spider_attack");
+            if (!death) { 
+                death = true;
+                StartCoroutine(Death());
+            }
         }
 
         if (timer < coolDown) {
@@ -26,7 +27,14 @@ public class Enemy : MonoBehaviour {
             return;
         }
 
-        if(agent.enabled) agent.SetDestination(Game.instance.UserPosition);
+        if (agent.enabled) agent.SetDestination(target.ScreenPosition);
         animator.SafePlay("spider_walk");
+    }
+
+    public IEnumerator Death() {
+        GetComponent<Spin>().SafeEnable();
+        animator.SafePlay("spider_attack");
+        yield return new WaitForSeconds(1.3f);
+        Game.instance.OnSpiderGoesIn(this);
     }
 }

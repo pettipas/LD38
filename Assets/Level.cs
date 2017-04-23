@@ -7,4 +7,6 @@ public class Level  {
 
     public Color centipede;
     public Color mushrooms;
+
+    public float centipspeed;
 }
