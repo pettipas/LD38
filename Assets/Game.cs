@@ -22,17 +22,37 @@ public class Game : MonoBehaviour {
     public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
     public float centispeed;
     public Collider worldextents;
+    public Centipede cent;
+    public Transform centLaunchPoint;
+
+    public List<Level> levels = new List<Level>();
 
     public void Awake() {
         instance = this;
+      
+    }
+
+    public IEnumerator NextLevel() {
+
+        Level l = levels[0];
+        Centipede c = cent.Duplicate(centLaunchPoint.position);
+        c.Dye(l.centipede);
+       
         for (int i = 0; i < InitalCoverage; i++) {
             Vector3 pos = RngPosition;
             Obstacle go = obstacle.Duplicate(pos.Round());
-            go.transform.SetParent(mushroomParent,false);
+
+            go.Dye(l.mushrooms);
+            go.transform.SetParent(mushroomParent, false);
             if (!obstacles.ContainsKey(pos.ToString())) {
                 obstacles.Add(pos.ToString(), go.gameObject);
             }
         }
+        yield break;
+    }
+
+    public void Start() {
+        StartCoroutine(NextLevel());
     }
 
     public bool InBounds(Vector3 position) {
@@ -89,7 +109,9 @@ public class Game : MonoBehaviour {
     }
 
     public void OnDestroySection(Section section, RaycastHit hit, Projectile projectile) {
-        obstacle.Duplicate(section.transform.position.Round());
+        Obstacle ob = obstacle.Duplicate(section.transform.position.Round());
+        Level l = levels[0];
+        ob.Dye(l.mushrooms);
         Destroy(section.gameObject);
         projectile.enabled = false;
         projectile.transform.position = gun.transform.position;
@@ -101,3 +123,5 @@ public class Game : MonoBehaviour {
         Gizmos.DrawWireCube(worldextents.bounds.center, worldextents.bounds.size);
     }
 }
+
+

@@ -11,4 +11,11 @@ public class Centipede : MonoBehaviour {
             sections[i].animationSpeed = startAimationSpeed;
         }
     }
+
+    public void Dye(Color c) {
+        MeshRenderer[] renderers = this.GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0;i < renderers.Length;i++) {
+            renderers[i].material.color = c;
+        }
+    }
 }

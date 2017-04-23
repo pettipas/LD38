@@ -21,7 +21,6 @@ public class Control : MonoBehaviour {
     Vector3 gunLocal;
     public void Awake() {
         timer = coolDown;
-        gunLocal = gun.transform.position;
     }
 
     public void Update() {
@@ -32,7 +31,6 @@ public class Control : MonoBehaviour {
             current = Vector3.left;
             charCtrl.Move(Vector3.left * speed * Time.smoothDeltaTime);
             moving = true;
-            gun.transform.localPosition = gunLocal;
             stick.SetAngle(new Vector3(0,0, 15));
         } else if (Input.GetKey(KeyCode.D)) {
             current = Vector3.right;
@@ -43,19 +41,15 @@ public class Control : MonoBehaviour {
             current = Vector3.back;
             charCtrl.Move(Vector3.back * speed * Time.smoothDeltaTime);
             moving = true;
-            gun.transform.localPosition = gunLocal;
             stick.SetAngle(new Vector3(-15, 0, 0));
         } else if (Input.GetKey(KeyCode.W)) {
             current = Vector3.forward;
             charCtrl.Move(Vector3.forward * speed * Time.smoothDeltaTime);
             moving = true;
-            gun.transform.localPosition = gunLocal;
             stick.SetAngle(new Vector3(15, 0, 0));
         }
 
-        if (Input.GetKeyDown(KeyCode.D)) {
-            gun.transform.position = gun.transform.position - new Vector3(0.2f,0,0);
-        }
+       
 
         if (moving) {
             animator.SafePlay("walk");

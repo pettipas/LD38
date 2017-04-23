@@ -6,6 +6,12 @@ public class Obstacle : MonoBehaviour {
     public int hits;
     public List<GameObject> renderers = new List<GameObject>();
 
+    public void Dye(Color c) {
+        renderers.ForEach(x => {
+            x.GetComponent<MeshRenderer>().material.color = c;
+        });
+    }
+
     public bool Destroyed {
         get {
             return hits >= renderers.Count;
