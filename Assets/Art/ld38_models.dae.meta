@@ -33,6 +33,9 @@ ModelImporter:
     100050: mushroom_4
     100052: mushroom_5
     100054: mushroom_6
+    100056: ' 1'
+    100058: case
+    100060: ctrl
     400000: Box_3
     400002: //RootNode
     400004: player_rest
@@ -61,6 +64,9 @@ ModelImporter:
     400050: mushroom_4
     400052: mushroom_5
     400054: mushroom_6
+    400056: ' 1'
+    400058: case
+    400060: ctrl
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
@@ -89,6 +95,9 @@ ModelImporter:
     2300050: mushroom_4
     2300052: mushroom_5
     2300054: mushroom_6
+    2300056: ' 1'
+    2300058: case
+    2300060: ctrl
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
@@ -117,6 +126,9 @@ ModelImporter:
     3300050: mushroom_4
     3300052: mushroom_5
     3300054: mushroom_6
+    3300056: ' 1'
+    3300058: case
+    3300060: ctrl
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
@@ -144,6 +156,8 @@ ModelImporter:
     4300048: head_2
     4300050: body_1
     4300052: body_2
+    4300054: case
+    4300056: ctrl
     9500000: //RootNode
   materials:
     importMaterials: 1

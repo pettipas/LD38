@@ -37,6 +37,11 @@ public class Projectile : MonoBehaviour {
                 obs.TakeHit(1, this);
                 return;
             }
+
+            Section section = hit.transform.GetComponent<Section>();
+            if (section != null) {
+                Game.instance.OnDestroySection(section, hit, this);
+            }
         }
       
 

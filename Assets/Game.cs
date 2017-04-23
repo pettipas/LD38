@@ -20,7 +20,7 @@ public class Game : MonoBehaviour {
     public float width;
     public float height;
     public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
-
+    public float centispeed;
     public Collider worldextents;
 
     public void Awake() {
@@ -86,5 +86,18 @@ public class Game : MonoBehaviour {
             projectile.transform.position = gun.transform.position;
         }
         if (obst != null && obst.Destroyed) Destroy(obst.gameObject);
+    }
+
+    public void OnDestroySection(Section section, RaycastHit hit, Projectile projectile) {
+        obstacle.Duplicate(section.transform.position.Round());
+        Destroy(section.gameObject);
+        projectile.enabled = false;
+        projectile.transform.position = gun.transform.position;
+    }
+
+
+    public void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(worldextents.bounds.center, worldextents.bounds.size);
     }
 }
