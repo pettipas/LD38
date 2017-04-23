@@ -37,6 +37,8 @@ public class Game : MonoBehaviour {
     public List<Obstacle> instances = new List<Obstacle>();
     public Text scoreText;
     public int score;
+    public GameObject enemyDeath;
+    public GameObject enemySlime;
     public void Awake() {
         score = 0;
         scoreText.text = score.ToString("D8");
@@ -201,7 +203,7 @@ public class Game : MonoBehaviour {
 
     bool nextLevel;
     public void OnDestroySection(Section section, RaycastHit hit, Projectile projectile) {
-
+        enemyDeath.Duplicate(section.transform.position);
         Obstacle ob = obstacle.Duplicate(section.transform.position.Round());
 
         if (obstacles.ContainsKey(ob.transform.position.ToString())) {
@@ -239,6 +241,18 @@ public class Game : MonoBehaviour {
     }
 
     public void OnDestroyGameSpider(GameSpider gs) {
+        enemyDeath.Duplicate(gs.gameObject.transform.position);
+        GameObject slime = enemySlime.Duplicate(gs.gameObject.transform.position);
+        slime.transform.position = new Vector3(slime.transform.position.x, -5, slime.transform.position.z);
+
+        if (Random.value > 0.4f) {
+            shakeCamera.Shake();
+            gameCam.RenewFlash();
+            Anomoly a = anomolyPrefab.Duplicate(RngPosition);
+            a.transform.SetParent(mushroomParent, false);
+            anomoly.Add(a);
+        }
+
         Destroy(gs.gameObject);
     }
 
@@ -268,6 +282,13 @@ public class Game : MonoBehaviour {
             Gizmos.color = Color.magenta;
             Gizmos.DrawSphere(x.position,10);
         });
+    }
+
+    public IEnumerable EndGame() {
+        Destroy(player.gameObject);
+
+        this.SafeDisable();
+        yield break;
     }
 
     public void LateUpdate() {

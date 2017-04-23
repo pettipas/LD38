@@ -39,6 +39,19 @@ ModelImporter:
     100062: stick
     100064: spider_ingame
     100066: anomoly
+    100068: player_rest_1
+    100070: player_rest_2
+    100072: player_rest_3
+    100074: player_rest_4
+    100076: player_rest_5
+    100078: player_rest_6
+    100080: death1
+    100082: death2
+    100084: death3
+    100086: death4
+    100088: death5
+    100090: death6
+    100092: slime
     400000: Box_3
     400002: //RootNode
     400004: player_rest
@@ -73,6 +86,19 @@ ModelImporter:
     400062: stick
     400064: spider_ingame
     400066: anomoly
+    400068: player_rest_1
+    400070: player_rest_2
+    400072: player_rest_3
+    400074: player_rest_4
+    400076: player_rest_5
+    400078: player_rest_6
+    400080: death1
+    400082: death2
+    400084: death3
+    400086: death4
+    400088: death5
+    400090: death6
+    400092: slime
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
@@ -107,6 +133,19 @@ ModelImporter:
     2300062: stick
     2300064: spider_ingame
     2300066: anomoly
+    2300068: player_rest_1
+    2300070: player_rest_2
+    2300072: player_rest_3
+    2300074: player_rest_4
+    2300076: player_rest_5
+    2300078: player_rest_6
+    2300080: death1
+    2300082: death2
+    2300084: death3
+    2300086: death4
+    2300088: death5
+    2300090: death6
+    2300092: slime
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
@@ -141,6 +180,19 @@ ModelImporter:
     3300062: stick
     3300064: spider_ingame
     3300066: anomoly
+    3300068: player_rest_1
+    3300070: player_rest_2
+    3300072: player_rest_3
+    3300074: player_rest_4
+    3300076: player_rest_5
+    3300078: player_rest_6
+    3300080: death1
+    3300082: death2
+    3300084: death3
+    3300086: death4
+    3300088: death5
+    3300090: death6
+    3300092: slime
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
@@ -173,6 +225,19 @@ ModelImporter:
     4300058: stick
     4300060: spider_ingame
     4300062: anomoly
+    4300064: player_rest_1
+    4300066: player_rest_2
+    4300068: player_rest_3
+    4300070: player_rest_4
+    4300072: player_rest_5
+    4300074: player_rest_6
+    4300076: death1
+    4300078: death2
+    4300080: death3
+    4300082: death4
+    4300084: death5
+    4300086: death6
+    4300088: slime
     9500000: //RootNode
   materials:
     importMaterials: 1
