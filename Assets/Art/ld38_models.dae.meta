@@ -20,6 +20,19 @@ ModelImporter:
     100024: Box_4
     100026: spark
     100028: explosion
+    100030: body
+    100032: body_1
+    100034: body_2
+    100036: head
+    100038: head_1
+    100040: head_2
+    100042: mushroom
+    100044: mushroom_1
+    100046: mushroom_2
+    100048: mushroom_3
+    100050: mushroom_4
+    100052: mushroom_5
+    100054: mushroom_6
     400000: Box_3
     400002: //RootNode
     400004: player_rest
@@ -35,6 +48,19 @@ ModelImporter:
     400024: Box_4
     400026: spark
     400028: explosion
+    400030: body
+    400032: body_1
+    400034: body_2
+    400036: head
+    400038: head_1
+    400040: head_2
+    400042: mushroom
+    400044: mushroom_1
+    400046: mushroom_2
+    400048: mushroom_3
+    400050: mushroom_4
+    400052: mushroom_5
+    400054: mushroom_6
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
@@ -50,6 +76,19 @@ ModelImporter:
     2300024: //RootNode
     2300026: spark
     2300028: explosion
+    2300030: body
+    2300032: body_1
+    2300034: body_2
+    2300036: head
+    2300038: head_1
+    2300040: head_2
+    2300042: mushroom
+    2300044: mushroom_1
+    2300046: mushroom_2
+    2300048: mushroom_3
+    2300050: mushroom_4
+    2300052: mushroom_5
+    2300054: mushroom_6
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
@@ -65,6 +104,19 @@ ModelImporter:
     3300024: //RootNode
     3300026: spark
     3300028: explosion
+    3300030: body
+    3300032: body_1
+    3300034: body_2
+    3300036: head
+    3300038: head_1
+    3300040: head_2
+    3300042: mushroom
+    3300044: mushroom_1
+    3300046: mushroom_2
+    3300048: mushroom_3
+    3300050: mushroom_4
+    3300052: mushroom_5
+    3300054: mushroom_6
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
@@ -79,6 +131,19 @@ ModelImporter:
     4300022: Box_4
     4300024: spark
     4300026: explosion
+    4300028: mushroom
+    4300030: mushroom_1
+    4300032: mushroom_2
+    4300034: mushroom_3
+    4300036: mushroom_4
+    4300038: mushroom_5
+    4300040: mushroom_6
+    4300042: head
+    4300044: head_1
+    4300046: body
+    4300048: head_2
+    4300050: body_1
+    4300052: body_2
     9500000: //RootNode
   materials:
     importMaterials: 1

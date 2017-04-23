@@ -25,6 +25,7 @@ public class Control : MonoBehaviour {
     }
 
     public void Update() {
+
         timer += Time.smoothDeltaTime;
         bool moving = false;
         if (Input.GetKey(KeyCode.A)) {
@@ -67,5 +68,9 @@ public class Control : MonoBehaviour {
             timer = 0;
             bomb.Duplicate((transform.position + current/2.0f));
         }
+    }
+
+    public void LateUpdate() {
+        transform.RespectHeight(0);
     }
 }

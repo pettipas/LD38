@@ -4,6 +4,11 @@ using System.Linq;
 
 public static class Extensions {
 
+
+    public static void RespectHeight(this Transform t, float height) {
+        t.position = new Vector3(t.position.x, height, t.position.z);
+    }
+
     public static void SafePlay(this Animator animator, string a, int layer = 0, float time = 0) {
 
         if (!animator.gameObject.activeSelf) {

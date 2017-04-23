@@ -24,14 +24,21 @@ public class Projectile : MonoBehaviour {
         }
         RaycastHit hit;
         Ray r = new Ray(transform.position, transform.forward);
-        if (Physics.SphereCast(r, 0.4f, out hit, 0.5f)) {
+        if (Physics.SphereCast(r, 0.1f, out hit, speed * Time.smoothDeltaTime)) {
             Bomb bomb = hit.transform.GetComponent<Bomb>();
-            if (bomb.name != "hit bomb") {
-                //8===D
+            if (bomb != null && bomb.name != "hit bomb") {
                 bomb.name = "hit bomb";
                 Game.instance.OnBombHit(bomb);
                 Destroy(bomb.gameObject);
+                return;
+            }
+            Obstacle obs = hit.transform.GetComponent<Obstacle>();
+            if (obs != null) {
+                obs.TakeHit(1, this);
+                return;
             }
         }
+      
+
     }
 }
