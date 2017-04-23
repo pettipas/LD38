@@ -39,7 +39,9 @@ public class Game : MonoBehaviour {
     public int score;
     public GameObject enemyDeath;
     public GameObject enemySlime;
+    public GameObject playerDeath;
     public void Awake() {
+        Time.timeScale = 1;
         score = 0;
         scoreText.text = score.ToString("D8");
         instance = this;
@@ -124,8 +126,8 @@ public class Game : MonoBehaviour {
         StartCoroutine(NextLevel());
     }
 
-    Color InvertColor( Color color) {
-        return new  Color(1.0f-color.r, 1.0f-color.g, 1.0f-color.b);
+    Color InvertColor(Color color) {
+        return new Color(1.0f - color.r, 1.0f - color.g, 1.0f - color.b);
     }
 
     public void InvertAll() {
@@ -154,12 +156,16 @@ public class Game : MonoBehaviour {
     }
 
     public Vector3 UserPosition {
-       get { return curser.transform.position; }
+        get { return curser.transform.position; }
     }
 
     public void Update() {
         scoreText.text = score.ToString("D8");
-        Vector3 p = player.transform.position/10.0f;
+        if (player == null || gameend) {
+            return;
+        }
+
+        Vector3 p = player.transform.position / 10.0f;
         curser.transform.position = new Vector3(p.x * 128.0f, 5, p.z * 128.0f);
     }
 
@@ -171,7 +177,7 @@ public class Game : MonoBehaviour {
     public void OnPixelate() {
         if (!started) {
             started = true;
-            pixelator.StartCoroutine(pixelator.Pixelate(()=> {
+            pixelator.StartCoroutine(pixelator.Pixelate(() => {
                 started = false;
             }));
         }
@@ -186,7 +192,7 @@ public class Game : MonoBehaviour {
     public void OnBombHit(Bomb bomb) {
         portalEffect.Duplicate(bomb.ScreenPosition);
         outSideBomb.Duplicate(bomb.ScreenPosition);
-        outSideBomb.GetComponent<Rigidbody>().AddTorque(transform.up * Random.Range(10,30) * Random.value*1000);
+        outSideBomb.GetComponent<Rigidbody>().AddTorque(transform.up * Random.Range(10, 30) * Random.value * 1000);
     }
 
     public void OnHitObstacle(Obstacle obst, Projectile projectile) {
@@ -214,12 +220,12 @@ public class Game : MonoBehaviour {
         else {
             obstacles.Add(ob.transform.position.ToString(), ob);
         }
-        
+
         Level l = levels[currentLevel];
         ob.Dye(l.mushrooms);
         Destroy(section.gameObject);
 
-        if (projectile != null) { 
+        if (projectile != null) {
             projectile.enabled = false;
             projectile.transform.position = gun.transform.position;
         }
@@ -237,6 +243,14 @@ public class Game : MonoBehaviour {
             nextLevel = true;
             centipedeSections = 8;
             StartCoroutine(NextLevel());
+        }
+    }
+
+    bool gameend;
+    public void OnPlayerHit() {
+        if (!gameend) {
+            gameend = true;
+            StartCoroutine(EndGame());
         }
     }
 
@@ -284,9 +298,33 @@ public class Game : MonoBehaviour {
         });
     }
 
-    public IEnumerable EndGame() {
+    public IEnumerator EndGame() {
+        Time.timeScale = 0.3f;
         Destroy(player.gameObject);
+        playerDeath.Duplicate(player.gameObject.transform.position);
+        yield return new WaitForSeconds(1.0f);
+        Time.timeScale = 0.6f;
 
+        List<GameObject> allofem = new List<GameObject>();
+        GameSpider[] spiders = GameObject.FindObjectsOfType<GameSpider>();
+        Obstacle[] obstacles = GameObject.FindObjectsOfType<Obstacle>();
+        Section[] sections = GameObject.FindObjectsOfType<Section>();
+
+        for (int i = 0; i< spiders.Length; i++) {
+            enemyDeath.Duplicate(spiders[i].transform.position);
+            Destroy(spiders[i].gameObject);
+            yield return null;
+        }
+        for (int i = 0; i < obstacles.Length; i++) {
+            enemyDeath.Duplicate(obstacles[i].transform.position);
+            Destroy(obstacles[i].gameObject);
+            yield return null;
+        }
+        for (int i = 0; i < sections.Length; i++) {
+            enemyDeath.Duplicate(sections[i].transform.position);
+            Destroy(sections[i].gameObject);
+            yield return null;
+        }
         this.SafeDisable();
         yield break;
     }

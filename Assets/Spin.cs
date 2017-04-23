@@ -19,4 +19,9 @@ public class Spin : MonoBehaviour{
 		Quaternion offset = Quaternion.Euler(rotationsPerSecond * delta);
 		mTrans.rotation = mTrans.rotation * offset;
 	}
+
+
+    public void Stop() {
+        this.SafeDisable();
+    }
 }

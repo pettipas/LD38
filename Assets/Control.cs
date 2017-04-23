@@ -25,6 +25,20 @@ public class Control : MonoBehaviour {
 
     public void Update() {
 
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(0.3f, 0.3f, 0.3f), Vector3.up);
+        for (int i = 0; i < hits.Length; i++) {
+            RaycastHit hit = hits[i];
+            Section section = hit.transform.GetComponent<Section>();
+            if (section != null) {
+                Game.instance.OnPlayerHit();
+            }
+
+            GameSpider gs = hit.transform.GetComponent<GameSpider>();
+            if (gs != null) {
+                Game.instance.OnPlayerHit();
+            }
+        }
+
         timer += Time.smoothDeltaTime;
         bool moving = false;
         if (Input.GetKey(KeyCode.A)) {
