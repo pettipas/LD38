@@ -20,6 +20,9 @@ public class Game : MonoBehaviour {
     public float width;
     public float height;
     public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
+
+    public Collider worldextents;
+
     public void Awake() {
         instance = this;
         for (int i = 0; i < InitalCoverage; i++) {
@@ -30,6 +33,10 @@ public class Game : MonoBehaviour {
                 obstacles.Add(pos.ToString(), go.gameObject);
             }
         }
+    }
+
+    public bool InBounds(Vector3 position) {
+        return worldextents.bounds.Contains(position);
     }
 
     public int InitalCoverage {
