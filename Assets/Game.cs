@@ -73,6 +73,7 @@ public class Game : MonoBehaviour {
             firstRunComplete = true;
             for (int i = 0; i < InitalCoverage; i++) {
                 Vector3 pos = RngPosition;
+                pos = pos.Round();
                 Obstacle go = obstacle.Duplicate(pos.Round());
 
                 go.Dye(l.mushrooms);
@@ -80,6 +81,8 @@ public class Game : MonoBehaviour {
                 if (!obstacles.ContainsKey(pos.ToString())) {
                     obstacles.Add(pos.ToString(), go.GetComponent<Obstacle>());
                 }
+                go.GetComponent<Animator>().SafePlay("popin");
+                yield return new WaitForSeconds(0.2f);
             }
         }
         else {
@@ -93,15 +96,14 @@ public class Game : MonoBehaviour {
                 }
                 else {
                     keyval.Value.Dye(l.mushrooms);
+                    keyval.Value.GetComponent<Animator>().SafePlay("popin");
+                    yield return new WaitForSeconds(0.2f);
                 }
             }
 
             keysToCleanUp.ForEach(k => {
                 obstacles.Remove(k);
             });
-
-
-
         }
 
         index++;
@@ -171,8 +173,11 @@ public class Game : MonoBehaviour {
             projectile.enabled = false;
             projectile.transform.position = gun.transform.position;
         }
-        obstacles.Remove(obst.transform.position.ToString());
-        if (obst != null && obst.Destroyed) Destroy(obst.gameObject);
+
+        if (obst != null && obst.Destroyed) {
+            obstacles.Remove(obst.transform.position.ToString());
+            Destroy(obst.gameObject);
+        }
     }
 
     bool nextLevel;
@@ -192,8 +197,11 @@ public class Game : MonoBehaviour {
         Level l = levels[currentLevel];
         ob.Dye(l.mushrooms);
         Destroy(section.gameObject);
-        projectile.enabled = false;
-        projectile.transform.position = gun.transform.position;
+
+        if (projectile != null) { 
+            projectile.enabled = false;
+            projectile.transform.position = gun.transform.position;
+        }
 
         if (Random.value > 0.9f) {
             shakeCamera.Shake();

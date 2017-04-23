@@ -4,7 +4,7 @@ using System.Collections;
 public class Projectile : MonoBehaviour {
 
     public float speed;
-    float distance = 10;
+    float distance = 15;
     [System.NonSerialized]
     public float _distance;
     public MeshRenderer skin;

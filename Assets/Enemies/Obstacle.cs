@@ -27,7 +27,7 @@ public class Obstacle : MonoBehaviour {
     }
 
     public void TakeHit(int hits, Projectile proj) {
-
+        GetComponent<Animator>().SafePlay("popin");
         this.hits += hits;
         Game.instance.OnHitObstacle(this, proj);
         if (this.hits >= renderers.Count) {

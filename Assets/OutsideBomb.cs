@@ -14,7 +14,7 @@ public class OutsideBomb : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
         animator.Play("explode");
         yield return new WaitForSeconds(2.0f);
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1000, 1000, 1000),Vector3.up);
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(128, 128, 128),Vector3.up);
         for (int i = 0; i < hits.Length;i++) {
             KnockBack kb = hits[i].transform.GetComponent<KnockBack>();
             if (kb != null) {
