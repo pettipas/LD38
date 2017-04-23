@@ -13,7 +13,7 @@ public class Control : MonoBehaviour {
     public Transform gun;
     public Transform launcher;
     public Animator animator;
-
+    public Stick stick;
     public Bomb bomb;
 
     public float timer;
@@ -33,20 +33,24 @@ public class Control : MonoBehaviour {
             charCtrl.Move(Vector3.left * speed * Time.smoothDeltaTime);
             moving = true;
             gun.transform.localPosition = gunLocal;
+            stick.SetAngle(new Vector3(0,0, 15));
         } else if (Input.GetKey(KeyCode.D)) {
             current = Vector3.right;
             charCtrl.Move(Vector3.right * speed * Time.smoothDeltaTime);
             moving = true;
+            stick.SetAngle(new Vector3(0, 0, -15));
         } else if (Input.GetKey(KeyCode.S)) {
             current = Vector3.back;
             charCtrl.Move(Vector3.back * speed * Time.smoothDeltaTime);
             moving = true;
             gun.transform.localPosition = gunLocal;
+            stick.SetAngle(new Vector3(-15, 0, 0));
         } else if (Input.GetKey(KeyCode.W)) {
             current = Vector3.forward;
             charCtrl.Move(Vector3.forward * speed * Time.smoothDeltaTime);
             moving = true;
             gun.transform.localPosition = gunLocal;
+            stick.SetAngle(new Vector3(15, 0, 0));
         }
 
         if (Input.GetKeyDown(KeyCode.D)) {
@@ -57,6 +61,7 @@ public class Control : MonoBehaviour {
             animator.SafePlay("walk");
         } else {
             animator.SafePlay("rest");
+            stick.SetAngle(new Vector3(0, 0, 0));
         }
 
         if(current != Vector3.zero) { 
