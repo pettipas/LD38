@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
 
@@ -34,8 +35,11 @@ public class Game : MonoBehaviour {
     public ParticleSystem energyWave;
     public GameSpider gameSpider;
     public List<Obstacle> instances = new List<Obstacle>();
-
+    public Text scoreText;
+    public int score;
     public void Awake() {
+        score = 0;
+        scoreText.text = score.ToString("D8");
         instance = this;
         Anomoly a = anomolyPrefab.Duplicate(RngPosition);
         a.transform.SetParent(mushroomParent, false);
@@ -52,6 +56,7 @@ public class Game : MonoBehaviour {
     bool firstRunComplete;
     int currentLevel;
     public IEnumerator NextLevel() {
+
         nextLevel = false;
         centipedeSections = 8;
         for (int i = 0; i < anomoly.Count; i++) {
@@ -117,6 +122,19 @@ public class Game : MonoBehaviour {
         StartCoroutine(NextLevel());
     }
 
+    Color InvertColor( Color color) {
+        return new  Color(1.0f-color.r, 1.0f-color.g, 1.0f-color.b);
+    }
+
+    public void InvertAll() {
+        Renderer[] renders = GameObject.FindObjectsOfType<Renderer>();
+        foreach (var render in renders) {
+            if (render.material.HasProperty("_Color")) {
+                render.material.color = InvertColor(render.material.color);
+            }
+        }
+    }
+
     public bool InBounds(Vector3 position) {
         return worldextents.bounds.Contains(position);
     }
@@ -138,6 +156,7 @@ public class Game : MonoBehaviour {
     }
 
     public void Update() {
+        scoreText.text = score.ToString("D8");
         Vector3 p = player.transform.position/10.0f;
         curser.transform.position = new Vector3(p.x * 128.0f, 5, p.z * 128.0f);
     }
