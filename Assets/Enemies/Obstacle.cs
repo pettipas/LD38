@@ -7,6 +7,10 @@ public class Obstacle : MonoBehaviour {
     public List<GameObject> renderers = new List<GameObject>();
 
     public void Dye(Color c) {
+        if (gameObject == null) {
+            Debug.Log("hmmm.. oh well");
+            return;
+        }
         renderers.ForEach(x => {
             x.GetComponent<MeshRenderer>().material.color = c;
         });

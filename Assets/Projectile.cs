@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour {
         }
         RaycastHit hit;
         Ray r = new Ray(transform.position, transform.forward);
-        if (Physics.SphereCast(r, 0.1f, out hit, speed * Time.smoothDeltaTime)) {
+        if (Physics.SphereCast(r, 0.3f, out hit, speed * Time.smoothDeltaTime)) {
             Bomb bomb = hit.transform.GetComponent<Bomb>();
             if (bomb != null && bomb.name != "hit bomb") {
                 bomb.name = "hit bomb";
@@ -41,6 +41,11 @@ public class Projectile : MonoBehaviour {
             Section section = hit.transform.GetComponent<Section>();
             if (section != null) {
                 Game.instance.OnDestroySection(section, hit, this);
+            }
+
+            GameSpider gs = hit.transform.GetComponent<GameSpider>();
+            if (gs != null) {
+                Game.instance.OnDestroyGameSpider(gs);
             }
         }
       

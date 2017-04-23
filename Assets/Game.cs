@@ -63,8 +63,10 @@ public class Game : MonoBehaviour {
 
         Level l = levels[index];
         currentLevel = index;
+
         Centipede c = cent.Duplicate(centLaunchPoint.position);
         c.Dye(l.centipede);
+        centispeed = l.centipspeed;
 
         if (!firstRunComplete) {
             //make new ones
@@ -81,10 +83,25 @@ public class Game : MonoBehaviour {
             }
         }
         else {
+            //uhhhh
+            List<string> keysToCleanUp = new List<string>();
+
             //dye current ones
-            foreach (var o in obstacles.Values) {
-                o.Dye(l.mushrooms);
+            foreach (KeyValuePair<string, Obstacle> keyval in obstacles) {
+                if (keyval.Value == null) {
+                    keysToCleanUp.Add(keyval.Key);
+                }
+                else {
+                    keyval.Value.Dye(l.mushrooms);
+                }
             }
+
+            keysToCleanUp.ForEach(k => {
+                obstacles.Remove(k);
+            });
+
+
+
         }
 
         index++;
@@ -192,6 +209,10 @@ public class Game : MonoBehaviour {
             centipedeSections = 8;
             StartCoroutine(NextLevel());
         }
+    }
+
+    public void OnDestroyGameSpider(GameSpider gs) {
+        Destroy(gs.gameObject);
     }
 
     public void OnCentipedeEscape(Section cent) {
