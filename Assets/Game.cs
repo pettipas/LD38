@@ -22,17 +22,26 @@ public class Game : MonoBehaviour {
     public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
     public float centispeed;
     public Collider worldextents;
+    public Collider centipedeDeathZone;
     public Centipede cent;
     public Transform centLaunchPoint;
-
+    public Anomoly anomolyPrefab;
+    public List<Transform> spiderSpawns = new List<Transform>();
+    public Enemy spiderPrefab;
+    public List<Anomoly> anomoly = new List<Anomoly>();
     public List<Level> levels = new List<Level>();
+
+    public CameraShake shakeCamera;
+    public ParticleSystem energyWave;
 
     public void Awake() {
         instance = this;
-      
     }
 
     public IEnumerator NextLevel() {
+
+        for (int i = 0; i < anomoly.Count; i++) {
+        }
 
         Level l = levels[0];
         Centipede c = cent.Duplicate(centLaunchPoint.position);
@@ -117,10 +126,19 @@ public class Game : MonoBehaviour {
         projectile.transform.position = gun.transform.position;
     }
 
+    public void OnCentipedeEscape(Section cent) {
+        shakeCamera.Shake();
+    }
+
 
     public void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(worldextents.bounds.center, worldextents.bounds.size);
+
+        spiderSpawns.ForEach(x => {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(x.position,10);
+        });
     }
 }
 

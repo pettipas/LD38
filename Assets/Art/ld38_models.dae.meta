@@ -37,6 +37,8 @@ ModelImporter:
     100058: case
     100060: ctrl
     100062: stick
+    100064: spider_ingame
+    100066: anomoly
     400000: Box_3
     400002: //RootNode
     400004: player_rest
@@ -69,6 +71,8 @@ ModelImporter:
     400058: case
     400060: ctrl
     400062: stick
+    400064: spider_ingame
+    400066: anomoly
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
@@ -101,6 +105,8 @@ ModelImporter:
     2300058: case
     2300060: ctrl
     2300062: stick
+    2300064: spider_ingame
+    2300066: anomoly
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
@@ -133,6 +139,8 @@ ModelImporter:
     3300058: case
     3300060: ctrl
     3300062: stick
+    3300064: spider_ingame
+    3300066: anomoly
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
@@ -163,6 +171,8 @@ ModelImporter:
     4300054: case
     4300056: ctrl
     4300058: stick
+    4300060: spider_ingame
+    4300062: anomoly
     9500000: //RootNode
   materials:
     importMaterials: 1

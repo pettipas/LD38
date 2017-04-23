@@ -84,6 +84,7 @@ public class HorizontalMotion : MonoState {
             return;
         }
 
+
         //you are the leader
         Vector3 nextPosition = Time.smoothDeltaTime * speed * Dir;
         RaycastHit[] hits = Physics.BoxCastAll(transform.position + nextPosition, Vector3.one / 2.0f, Dir, transform.rotation, Time.smoothDeltaTime * speed);

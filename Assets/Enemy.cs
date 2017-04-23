@@ -8,7 +8,11 @@ public class Enemy : MonoBehaviour {
     public Animator animator;
     public float distance = 2.0f;
     public float coolDown = 3.0f;
-    public float timer; 
+    public float timer;
+
+    public void Start() {
+
+    }
 
     public void Update() {
         timer += Time.smoothDeltaTime;
