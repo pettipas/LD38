@@ -25,8 +25,13 @@ public class Projectile : MonoBehaviour {
         RaycastHit hit;
         Ray r = new Ray(transform.position, transform.forward);
         if (Physics.SphereCast(r, 0.4f, out hit, 0.5f)) {
-
-           
+            Bomb bomb = hit.transform.GetComponent<Bomb>();
+            if (bomb.name != "hit bomb") {
+                //8===D
+                bomb.name = "hit bomb";
+                Game.instance.OnBombHit(bomb);
+                Destroy(bomb.gameObject);
+            }
         }
     }
 }

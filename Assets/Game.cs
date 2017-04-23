@@ -11,6 +11,11 @@ public class Game : MonoBehaviour {
     public Transform screen;
     public Transform curser;
 
+    bool started;
+    public Pixelator pixelator;
+    public GameObject portalEffect;
+    public OutsideBomb outSideBomb;
+
     public void Awake() {
         instance = this;
     }
@@ -27,5 +32,20 @@ public class Game : MonoBehaviour {
     public void OnProjectileAtMaxRange(Projectile projectile) {
         projectile.enabled = false;
         projectile.transform.position = gun.transform.position;
+    }
+
+    public void OnPixelate() {
+        if (!started) {
+            started = true;
+            pixelator.StartCoroutine(pixelator.Pixelate(()=> {
+                started = false;
+            }));
+        }
+    }
+
+    public void OnBombHit(Bomb bomb) {
+        portalEffect.Duplicate(bomb.ScreenPosition);
+        outSideBomb.Duplicate(bomb.ScreenPosition);
+        outSideBomb.GetComponent<Rigidbody>().AddTorque(transform.up * Random.Range(10,30) * Random.value*1000);
     }
 }

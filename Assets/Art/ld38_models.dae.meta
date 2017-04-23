@@ -16,6 +16,10 @@ ModelImporter:
     100016: spider_rest
     100018: spider_walk_1
     100020: spider_walk_3
+    100022: Box
+    100024: Box_4
+    100026: spark
+    100028: explosion
     400000: Box_3
     400002: //RootNode
     400004: player_rest
@@ -27,6 +31,10 @@ ModelImporter:
     400016: spider_rest
     400018: spider_walk_1
     400020: spider_walk_3
+    400022: Box
+    400024: Box_4
+    400026: spark
+    400028: explosion
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
@@ -37,6 +45,11 @@ ModelImporter:
     2300014: spider_rest
     2300016: spider_walk_1
     2300018: spider_walk_3
+    2300020: Box
+    2300022: Box_4
+    2300024: //RootNode
+    2300026: spark
+    2300028: explosion
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
@@ -47,6 +60,11 @@ ModelImporter:
     3300014: spider_rest
     3300016: spider_walk_1
     3300018: spider_walk_3
+    3300020: Box
+    3300022: Box_4
+    3300024: //RootNode
+    3300026: spark
+    3300028: explosion
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
@@ -57,6 +75,10 @@ ModelImporter:
     4300014: spider_attack_1
     4300016: spider_attack_2
     4300018: spider_walk_3
+    4300020: Box
+    4300022: Box_4
+    4300024: spark
+    4300026: explosion
     9500000: //RootNode
   materials:
     importMaterials: 1

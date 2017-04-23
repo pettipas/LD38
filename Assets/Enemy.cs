@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour {
             return;
         }
 
-        agent.SetDestination(Game.instance.UserPosition);
+        if(agent.enabled) agent.SetDestination(Game.instance.UserPosition);
         animator.SafePlay("spider_walk");
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+   
+
+    public Vector3 ScreenPosition {
+        get {
+            Vector3 p = transform.position/5.0f;
+            return new Vector3(p.x* 128.0f, 5, p.z* 128.0f);
+        }
+    }
 }
