@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour {
     public IEnumerator Death() {
         GetComponent<Spin>().SafeEnable();
         animator.SafePlay("spider_attack");
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(3.0f);
         Game.instance.OnSpiderGoesIn(this);
     }
 }

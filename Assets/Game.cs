@@ -52,7 +52,7 @@ public class Game : MonoBehaviour {
     bool firstRunComplete;
     int currentLevel;
     public IEnumerator NextLevel() {
-
+        nextLevel = false;
         centipedeSections = 8;
         for (int i = 0; i < anomoly.Count; i++) {
             Enemy e = spiderPrefab.Duplicate(spiderSpawns.GetRandomElement().position);
