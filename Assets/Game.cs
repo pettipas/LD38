@@ -203,7 +203,7 @@ public class Game : MonoBehaviour {
             projectile.transform.position = gun.transform.position;
         }
 
-        if (Random.value > 0.9f) {
+        if (Random.value > 0.7f) {
             shakeCamera.Shake();
             gameCam.RenewFlash();
             Anomoly a = anomolyPrefab.Duplicate(RngPosition);
@@ -227,7 +227,7 @@ public class Game : MonoBehaviour {
         shakeCamera.Shake();
         gameCam.RenewFlash();
         Destroy(cent.gameObject);
-        if(Random.value > 0.8f) { 
+        if(Random.value > 0.6f) { 
             Anomoly a = anomolyPrefab.Duplicate(RngPosition);
             a.transform.SetParent(mushroomParent, false);
             anomoly.Add(a);

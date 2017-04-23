@@ -25,6 +25,10 @@ public class Obstacle : MonoBehaviour {
     public void Start() {
         TakeHit(0, null);
     }
+    [ContextMenu("testanimation")]
+    public void Test() {
+        GetComponent<Animator>().SafePlay("popin");
+    }
 
     public void TakeHit(int hits, Projectile proj) {
         GetComponent<Animator>().SafePlay("popin");
