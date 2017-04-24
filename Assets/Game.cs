@@ -66,9 +66,10 @@ public class Game : MonoBehaviour {
     public int index;
 
     bool firstRunComplete;
+    bool changinglevels;
     int currentLevel;
     public IEnumerator NextLevel() {
-
+        changinglevels = true;
         nextLevel = false;
         centipedeSections = 8;
         for (int i = 0; i < anomoly.Count; i++) {
@@ -127,7 +128,7 @@ public class Game : MonoBehaviour {
         if (index >= levels.Count) {
             index = 0;
         }
-
+        changinglevels = false;
         goodTHing.Play();
         yield return new WaitForSeconds(1);
         goodTHing.Play();
@@ -224,8 +225,8 @@ public class Game : MonoBehaviour {
     }
 
     public void OnHitObstacle(Obstacle obst, Projectile projectile) {
-
-        if (player == null || gameend) {
+        hitMushroom.Play();
+        if (player == null || gameend || changinglevels) {
             return;
         }
 
@@ -238,11 +239,13 @@ public class Game : MonoBehaviour {
             obstacles.Remove(obst.transform.position.ToString());
             Destroy(obst.gameObject);
         }
-        hitMushroom.Play();
     }
 
     bool nextLevel;
     public void OnDestroySection(Section section, RaycastHit hit, Projectile projectile) {
+        if (player == null || gameend || changinglevels) {
+            return;
+        }
         enemyDeath.Duplicate(section.transform.position);
         Obstacle ob = obstacle.Duplicate(section.transform.position.Round());
 
@@ -313,6 +316,7 @@ public class Game : MonoBehaviour {
     }
 
     public void OnCentipedeEscape(Section cent) {
+        badThing.Play();
         shakeCamera.Shake();
         gameCam.RenewFlash();
         Destroy(cent.gameObject);

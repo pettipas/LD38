@@ -9,7 +9,6 @@ public class StartGame : MonoBehaviour {
     public AudioSource audioSource;
 
     public IEnumerator Start() {
-        PlayerPrefs.DeleteAll();
         while (!Input.anyKey) {
             yield return null;
         }
