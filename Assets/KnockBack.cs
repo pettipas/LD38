@@ -17,6 +17,7 @@ public class KnockBack : MonoBehaviour {
     public Spin spin;
 
     public void OnEnable() {
+        Game.instance.score += 1000;
         enemy.SafeDisable();
         distance = 0.01f;
         agent.enabled = false;

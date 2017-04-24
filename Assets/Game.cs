@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour {
 
@@ -36,6 +37,10 @@ public class Game : MonoBehaviour {
     public GameSpider gameSpider;
     public List<Obstacle> instances = new List<Obstacle>();
     public Text scoreText;
+    public Text highScorePhrase;
+    public Text newhighScorePhrase;
+    public Text actualHighScore;
+    public Text gameOver;
     public int score;
     public GameObject enemyDeath;
     public GameObject enemySlime;
@@ -159,17 +164,30 @@ public class Game : MonoBehaviour {
         get { return curser.transform.position; }
     }
 
+    public Animator scoreAnmimator;
+
+    string textLastFrame;
     public void Update() {
-        scoreText.text = score.ToString("D8");
         if (player == null || gameend) {
             return;
         }
+
+        if (textLastFrame != scoreText.text) {
+            scoreAnmimator.SafePlay("scoreget");
+        }
+        scoreText.text = score.ToString("D8");
+        textLastFrame = scoreText.text;
+       
 
         Vector3 p = player.transform.position / 10.0f;
         curser.transform.position = new Vector3(p.x * 128.0f, 5, p.z * 128.0f);
     }
 
     public void OnProjectileAtMaxRange(Projectile projectile) {
+        if (gun == null) {
+            //you prolly dead
+            return;
+        }
         projectile.enabled = false;
         projectile.transform.position = gun.transform.position;
     }
@@ -196,6 +214,11 @@ public class Game : MonoBehaviour {
     }
 
     public void OnHitObstacle(Obstacle obst, Projectile projectile) {
+
+        if (player == null || gameend) {
+            return;
+        }
+
         if (projectile != null) {
             projectile.enabled = false;
             projectile.transform.position = gun.transform.position;
@@ -244,6 +267,8 @@ public class Game : MonoBehaviour {
             centipedeSections = 8;
             StartCoroutine(NextLevel());
         }
+
+        score += 500;
     }
 
     bool gameend;
@@ -266,7 +291,7 @@ public class Game : MonoBehaviour {
             a.transform.SetParent(mushroomParent, false);
             anomoly.Add(a);
         }
-
+        score += 100;
         Destroy(gs.gameObject);
     }
 
@@ -325,7 +350,25 @@ public class Game : MonoBehaviour {
             Destroy(sections[i].gameObject);
             yield return null;
         }
-        this.SafeDisable();
+        gameOver.enabled = true;
+        //   public Text highScorePhrase;
+        //  public Text actualHighScore;newhighScorePhrase
+        //  public Text gameOver;
+        int highscore = PlayerPrefs.GetInt("highscore", 0);
+
+        if (highscore <= score) {
+            highScorePhrase.enabled = true;
+        }else {
+            newhighScorePhrase.enabled = true;
+            PlayerPrefs.SetInt("highscore", score);
+        }
+        actualHighScore.text = highscore.ToString("D8");
+
+        while (!Input.anyKey) {
+            yield return null;
+        }
+        
+        SceneManager.LoadScene("start");
         yield break;
     }
 

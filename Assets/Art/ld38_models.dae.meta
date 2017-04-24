@@ -52,6 +52,16 @@ ModelImporter:
     100088: death5
     100090: death6
     100092: slime
+    100094: A
+    100096: Box_5
+    100098: Box_6
+    100100: Box_7
+    100102: Box_8
+    100104: D
+    100106: N
+    100108: R
+    100110: R_1
+    100112: U
     400000: Box_3
     400002: //RootNode
     400004: player_rest
@@ -99,6 +109,16 @@ ModelImporter:
     400088: death5
     400090: death6
     400092: slime
+    400094: A
+    400096: Box_5
+    400098: Box_6
+    400100: Box_7
+    400102: Box_8
+    400104: D
+    400106: N
+    400108: R
+    400110: R_1
+    400112: U
     2300000: Box_3
     2300002: player_rest
     2300004: player_right_step
@@ -146,6 +166,16 @@ ModelImporter:
     2300088: death5
     2300090: death6
     2300092: slime
+    2300094: A
+    2300096: Box_5
+    2300098: Box_6
+    2300100: Box_7
+    2300102: Box_8
+    2300104: D
+    2300106: N
+    2300108: R
+    2300110: R_1
+    2300112: U
     3300000: Box_3
     3300002: player_rest
     3300004: player_right_step
@@ -193,6 +223,16 @@ ModelImporter:
     3300088: death5
     3300090: death6
     3300092: slime
+    3300094: A
+    3300096: Box_5
+    3300098: Box_6
+    3300100: Box_7
+    3300102: Box_8
+    3300104: D
+    3300106: N
+    3300108: R
+    3300110: R_1
+    3300112: U
     4300000: Box_3
     4300002: player_step_left
     4300004: player_right_step
@@ -238,6 +278,16 @@ ModelImporter:
     4300084: death5
     4300086: death6
     4300088: slime
+    4300090: Box_5
+    4300092: Box_6
+    4300094: Box_7
+    4300096: Box_8
+    4300098: A
+    4300100: N
+    4300102: D
+    4300104: R
+    4300106: U
+    4300108: R_1
     9500000: //RootNode
   materials:
     importMaterials: 1
