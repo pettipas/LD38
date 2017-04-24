@@ -16,6 +16,8 @@ public class KnockBack : MonoBehaviour {
     public MaterialFlasher flasher;
     public Spin spin;
 
+    public AudioSource source;
+
     public void OnEnable() {
         Game.instance.score += 1000;
         enemy.SafeDisable();
@@ -23,6 +25,7 @@ public class KnockBack : MonoBehaviour {
         agent.enabled = false;
         ctrl.enabled = true;
         flasher.FlashForTime(5.0f);
+        source.Play();
     }
 
     public void OnDisable() {
