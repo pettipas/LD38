@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Gun : MonoBehaviour {
-
+    public AudioSource shoot;
     public Projectile projectile;
     public Transform launcher;
     public Projectile current;
@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !current.enabled) {
+            shoot.Play();
             current.enabled = true;
             current.transform.forward = launcher.forward;
             gun.Play("shoot", 0, 0);

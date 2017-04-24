@@ -15,6 +15,7 @@ public class Control : MonoBehaviour {
     public Animator animator;
     public Stick stick;
     public Bomb bomb;
+   
 
     public float timer;
     public float coolDown = 3.0f;

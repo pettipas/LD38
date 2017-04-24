@@ -45,6 +45,9 @@ public class Game : MonoBehaviour {
     public GameObject enemyDeath;
     public GameObject enemySlime;
     public GameObject playerDeath;
+    public AudioSource badThing;
+    public AudioSource hitMushroom;
+    public AudioSource goodTHing;
     public void Awake() {
         Time.timeScale = 1;
         score = 0;
@@ -124,8 +127,15 @@ public class Game : MonoBehaviour {
         if (index >= levels.Count) {
             index = 0;
         }
+
+        goodTHing.Play();
+        yield return new WaitForSeconds(1);
+        goodTHing.Play();
+        yield return new WaitForSeconds(1);
+        goodTHing.Play();
         yield break;
     }
+
 
     public void Start() {
         StartCoroutine(NextLevel());
@@ -228,6 +238,7 @@ public class Game : MonoBehaviour {
             obstacles.Remove(obst.transform.position.ToString());
             Destroy(obst.gameObject);
         }
+        hitMushroom.Play();
     }
 
     bool nextLevel;
@@ -248,12 +259,17 @@ public class Game : MonoBehaviour {
         ob.Dye(l.mushrooms);
         Destroy(section.gameObject);
 
-        if (projectile != null) {
+        if (projectile != null && gun != null) {
             projectile.enabled = false;
             projectile.transform.position = gun.transform.position;
         }
 
+        if (gun == null) {
+            return;
+        }
+
         if (Random.value > 0.7f) {
+            badThing.Play();
             shakeCamera.Shake();
             gameCam.RenewFlash();
             Anomoly a = anomolyPrefab.Duplicate(RngPosition);
@@ -285,6 +301,7 @@ public class Game : MonoBehaviour {
         slime.transform.position = new Vector3(slime.transform.position.x, -5, slime.transform.position.z);
 
         if (Random.value > 0.4f) {
+            badThing.Play();
             shakeCamera.Shake();
             gameCam.RenewFlash();
             Anomoly a = anomolyPrefab.Duplicate(RngPosition);
@@ -330,7 +347,6 @@ public class Game : MonoBehaviour {
         yield return new WaitForSeconds(1.0f);
         Time.timeScale = 0.6f;
 
-        List<GameObject> allofem = new List<GameObject>();
         GameSpider[] spiders = GameObject.FindObjectsOfType<GameSpider>();
         Obstacle[] obstacles = GameObject.FindObjectsOfType<Obstacle>();
         Section[] sections = GameObject.FindObjectsOfType<Section>();
@@ -350,24 +366,32 @@ public class Game : MonoBehaviour {
             Destroy(sections[i].gameObject);
             yield return null;
         }
-        gameOver.enabled = true;
-        //   public Text highScorePhrase;
-        //  public Text actualHighScore;newhighScorePhrase
-        //  public Text gameOver;
-        int highscore = PlayerPrefs.GetInt("highscore", 0);
+     
+        gameOver.gameObject.SetActive(true);
 
-        if (highscore <= score) {
-            highScorePhrase.enabled = true;
-        }else {
-            newhighScorePhrase.enabled = true;
+        int highscore = PlayerPrefs.GetInt("highscore");
+
+        if (highscore == 0) {
+            PlayerPrefs.SetInt("highscore", score);
+            highscore = PlayerPrefs.GetInt("highscore");
+        }
+
+        if (highscore >= score) {
+            highScorePhrase.gameObject.SetActive(true);
+        } else {
+            newhighScorePhrase.gameObject.SetActive(true);
             PlayerPrefs.SetInt("highscore", score);
         }
+
+        highscore = PlayerPrefs.GetInt("highscore");
+        actualHighScore.gameObject.SetActive(true);
         actualHighScore.text = highscore.ToString("D8");
 
+        PlayerPrefs.Save();
         while (!Input.anyKey) {
             yield return null;
         }
-        
+       
         SceneManager.LoadScene("start");
         yield break;
     }

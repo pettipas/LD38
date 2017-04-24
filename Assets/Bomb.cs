@@ -32,6 +32,9 @@ public class Bomb : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
+    public void PlaySound() {
+    }
+    
     public Vector3 ScreenPosition {
         get {
             Vector3 p = transform.position/10.0f;
